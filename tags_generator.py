@@ -25,7 +25,7 @@ def create_df(filepath='/Users/wolfsinem/product-tagging/data/flipkart_com-ecomm
     return model_df
 
 
-def tokenize_string(sentence):
+def tokenize_string(sentence, size_tags=5):
     """This function splits a string into substrings using a regular expression
      using RegexpTokenizer. Additionally it counts the occurence of each word
      and returns the top 5 words which can be used as tags
@@ -43,7 +43,7 @@ def tokenize_string(sentence):
                             'specifications'}
 
     filter_tokens = [w for w in new_words if not w in stop_words and not w in manual_filtered_words]
-    count_terms = Counter(filter_tokens).most_common(5)
+    count_terms = Counter(filter_tokens).most_common(size_tags)
     return [item[0] for item in count_terms]
 
 
