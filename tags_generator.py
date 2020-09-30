@@ -54,7 +54,9 @@ def tokenized_list():
     model_df = create_df()
     token_lists = []
     for i in model_df['description']:
-        token_lists.append(tokenize_string(str((i))))
+        token_lists.append(
+            [x for x in tokenize_string(str((i))) if not any(c.isdigit() for c in x)]
+            )
 
     for i in range(len(model_df.index)):
         model_df.at[i,'tags'] = token_lists[i]
@@ -63,4 +65,5 @@ def tokenized_list():
 
 if __name__ == "__main__":
     df_with_tags = tokenized_list()
-    print(df_with_tags)
+    print(df_with_tags.head())
+    
