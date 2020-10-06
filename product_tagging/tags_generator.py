@@ -60,6 +60,9 @@ def tokenized_list():
 
     for i in range(len(model_df.index)):
         model_df.at[i,'tags'] = token_lists[i]
+
+    model_df.dropna(inplace=True)
+    
     return model_df
     
 
