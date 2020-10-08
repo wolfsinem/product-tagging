@@ -11,9 +11,11 @@ from sklearn.multiclass import OneVsRestClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score
 
-from product_tagging.tags_generator import create_df, tokenized_list
+from tags_generator import tokenized_list
+
 
 # created dataframe with new tags column 
+n = 2000 # number of rows
 model_df = tokenized_list()
 
 
@@ -24,7 +26,7 @@ def preprocessing_df():
     and fit the label sets binarizer and transform the given label sets.  
     """
 
-    target_variable = model_df['tags']
+    target_variable = model_df['tags'][:n]
     mlb = MultiLabelBinarizer()
     target_variable = mlb.fit_transform(target_variable)
 
@@ -45,7 +47,7 @@ def tfidfvec():
                              token_pattern=r'\w{3,}'
                             )
     
-    product_description = model_df['description']
+    product_description = model_df['description'][:n]
     independent_variable = vectorizer.fit_transform(product_description)
     return independent_variable
 
@@ -53,14 +55,6 @@ def tfidfvec():
 def traintestSplit(test_size=0.3, random_state=42):
     """This function splits the independent variable and target variable
     data into a test and train set. 
-
-    :param test_size: represent the proportion of the dataset to include in the 
-                      test split.
-    :type test_size: float or int, default=None.
-
-    :param random_state: Controls the shuffling applied to the data before 
-                         applying the split.
-    :type random_state: int or RandomState instance, default=None.
     """
     
     independent_variable = tfidfvec()
@@ -93,7 +87,11 @@ def linearSVC_pipeline(random_state=42, tol=1e-1, C=8.385, n_jobs=-1):
                                                 n_jobs = n_jobs)),
             ])
     
-    Linear_pipeline.fit(X_train, y_train)
+    svcpipeline = Linear_pipeline.fit(X_train, y_train)
     prediction = Linear_pipeline.predict(X_test)
     accScore = accuracy_score(y_test, prediction)
-    return accScore
+    return svcpipeline, prediction,accScore
+
+
+svcpipeline, prediction, accScore = linearSVC_pipeline()
+print(accScore)
