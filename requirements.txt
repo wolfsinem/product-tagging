@@ -1,0 +1,7 @@
+matplotlib==3.1.2
+pandas==0.25.3
+tokenizer==2.3.0
+numpy==1.18.1
+nltk==3.5
+tensorflow==1.12.0
+scikit_learn==0.23.2
