@@ -11,7 +11,8 @@ from sklearn.multiclass import OneVsRestClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score
 
-from tags_generator import tokenized_list
+import pickle
+from product_tagging.tags_generator import tokenized_list
 
 
 # created dataframe with new tags column 
@@ -95,3 +96,6 @@ def linearSVC_pipeline(random_state=42, tol=1e-1, C=8.385, n_jobs=-1):
 
 svcpipeline, prediction, accScore = linearSVC_pipeline()
 print(accScore)
+
+# saving our trained model to pkl format
+pickle.dump(svcpipeline, open('model.pkl', 'wb'))
