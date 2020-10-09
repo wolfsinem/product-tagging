@@ -95,7 +95,8 @@ def linearSVC_pipeline(random_state=42, tol=1e-1, C=8.385, n_jobs=-1):
 
 
 svcpipeline, prediction, accScore = linearSVC_pipeline()
-print(accScore)
+# print(accScore)
 
 # saving our trained model to pkl format
 pickle.dump(svcpipeline, open('model.pkl', 'wb'))
+model = pickle.load(open('model.pkl', 'rb'))
