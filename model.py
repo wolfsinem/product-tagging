@@ -1,4 +1,5 @@
 # Machine Learning - model training
+from numpy.lib.function_base import vectorize
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer, TfidfVectorizer
@@ -97,6 +98,16 @@ def linearSVC_pipeline(random_state=42, tol=1e-1, C=8.385, n_jobs=-1):
 svcpipeline, prediction, accScore = linearSVC_pipeline()
 # print(accScore)
 
-# saving our trained model to pkl format
+
+# saving our trained model, tfidVectorizer and Mlb to pkl format
 pickle.dump(svcpipeline, open('model.pkl', 'wb'))
+pickle.dump(tfidfvec(), open('tfidfVectorizer.pkl', 'wb'))
+
 model = pickle.load(open('model.pkl', 'rb'))
+vectorizer = pickle.load(open('tfidfVectorizer.pkl', 'rb'))
+
+# with open('text_classifier', 'wb') as picklefile:
+#     pickle.dump(Linear_pipeline,picklefile)
+    
+# with open('vect', 'wb') as picklefile:
+#     pickle.dump(vectorizer,picklefile)
