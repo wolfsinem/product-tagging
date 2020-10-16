@@ -21,7 +21,7 @@ target_variable = mlb.fit_transform(target_variable)
 
 # Open our classifier and vectorizer pickle files
 with open('text_classifier.pkl', 'vect.pkl', 'rb') as training_model:
-    model, vectorizer = pickle.load(training_model)
+    model = pickle.load(training_model)
 
 with open('tfidfvectorizer.pkl', 'rb') as tfvectorizer:
     vectorizer = pickle.load(tfvectorizer)
