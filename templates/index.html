@@ -8,6 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://kit.fontawesome.com/9b31ab4365.js" crossorigin="anonymous"></script>
+  <script src="js/index.js"></script> 
 </head>
 <body>
 
@@ -51,22 +52,24 @@
     <div class="container">
         <div class="row clearfix">
             <div class="col-md-6 col-md-offset-3 column">
-                <form role="form">
-                    <div class="form-group">
-                         <label for="exampleInputEmail1">Input text</label><input type="email" class="form-control" id="exampleInputEmail1" />
-                    </div>
-                    <div class="form-group">
-                         <label for="exampleInputFile">File input</label><input type="file" id="exampleInputFile" />
-                    </div>
-                    <button type="button" class="btn btn-success">Predict</button>
+                <form action="http://127.0.0.1:5000/predict" method="POST">
+                    <!-- <div class="form-group"> -->
+                      <!-- <label for="exampleFormControlTextarea1">Text input</label> -->
+                    <input type="text" name="description" placeholder="Product description" required=required />
+
+                    <button type="submit">Predict</button>
+                      <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+                      <input type="submit"> -->
+                    <!-- </div> -->
+                    <!-- <div class="form-group">
+                         <label for="exampleInputFile">File input</label><input type="file" id="exampleInputFile" /> -->
+                    <!-- </div> -->
+                    <!-- <button class="btn btn-success" id="predict_tags">Predict</button> -->
                 </form>
+                <br>
+                {{ generated_tags }}
             </div>
         </div>
 </div>
-
-
-
-
-
 </body>
 </html>
