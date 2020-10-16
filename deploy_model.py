@@ -35,7 +35,7 @@ user_input_string = ["""Key Features of Alisha Solid Womens Cycling Shorts Cotto
                     Gentle Machine Wash in Lukewarm Water, Do Not Bleach Additional 
                     Details Style Code ALTHT_3P_21 In the Box 3 shorts"""]
 
-string_1 = vectorizer.transform(user_input_string).toarray()
+user_input_string = vectorizer.transform(user_input_string).toarray()
 label = model.predict(user_input_string)
 
 # Output the generated tags by the machine learning model
