@@ -9,14 +9,15 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://kit.fontawesome.com/9b31ab4365.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" type= "text/css" href="static/styles/style.css">
+  <script src="static/functions.js"></script>
 </head>
 <body>
 
 <div class="jumbotron bg-info text-center">
   <h1>Product Tagging Algorithm</h1>
   <p>Using the Natural Language Toolkit</p>
-  <!-- <br><form action = "http://localhost:5000/predict" method = "POST"> -->
-  <p><button>return</button></p>
+  <br>
+      <p><button>RETURN</button></p>
 </div>
   
 <div class="container">
@@ -43,9 +44,10 @@
             <div class="col-md-6 col-md-offset-3 column">
                 <form action="http://localhost:5000/generated" method="POST">
                     <!-- <input type="text" class="form-control" name="description" placeholder="Product description" required=required /> -->
-                    <textarea class="form-control rounded-0" name="description" required=required placeholder="Product description" id="exampleFormControlTextarea1" rows="5"></textarea>
+                    <textarea class="form-control rounded-0" name="product_description" required=required placeholder="Product description" id="exampleFormControlTextarea1" rows="5"></textarea>
                     <br>
                     <button type="submit">Generate</button>
+                    <button onclick="myFunction()">Copy text</button>
                 </form>
                 <br>
                 {{ tags_set }}

@@ -54,12 +54,6 @@ def predict():
         return render_template("index.html", generated_tags = 'The set of predicted tags are {}'.format(generated_tags))
 
 
-# @app.route('/algorithm', methods = ['GET','POST'])
-# def generate():
-#     """serve main algorithm template """
-#     return render_template("algorithm.html")
-
-
 @app.route('/generated', methods=['POST', 'GET'])
 def generate_tags():
     """This product generator doesn't use any machine learning to create tags 
@@ -69,7 +63,7 @@ def generate_tags():
     if request.method == 'POST':
         # TODO ask user how many tags they want to generate
         tags_size = 20
-        user_input_string = request.form.values()
+        user_input_string = request.form.get('product_description')
         tags_set = tokenize_user_text_input(user_input_string, tags_size)
 
         # Output the generated tags by the machine learning model
