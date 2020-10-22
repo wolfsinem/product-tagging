@@ -8,55 +8,47 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://kit.fontawesome.com/9b31ab4365.js" crossorigin="anonymous"></script>
-  <script src="js/index.js"></script> 
+  <link rel="stylesheet" type= "text/css" href="static/styles/style.css">
 </head>
 <body>
 
+
 <div class="jumbotron text-center">
   <h1>Automated Product Tagging</h1>
-  <p>Using machine learning and TFIDF-Vectorizer</p> 
+    <p>Using machine learning and TFIDF-Vectorizer</p> 
+    <br><form action = "http://localhost:5000/algorithm" method = "POST">
+      <p><button>Product tagging algorithm</button></p>
+    </form>
 </div>
+
   
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
       <h3>Step 1 <i class="fa fa-database" aria-hidden="true"></i></h3> 
-      <p>The user can either upload a CSV file containing data with the columns product name and product description, or try and fill in the box below with some lines of text</p>
-      <!-- <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p> -->
+      <p>The user can either upload a <b>CSV file</b> containing data with the columns <b>product name</b> and <b>product description</b>, or try and fill in the box below with some lines of text</p>
     </div>
     <div class="col-sm-4">
       <h3>Step 2 <i class="fa fa-hand-o-up" aria-hidden="true"></i></h3>
-      <p>Let the user simply click on the predict button</p>
-      <!-- <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p> -->
+      <p>Let the user simply click on the <b>predict</b> button</p>
     </div>
     <div class="col-sm-4">
       <h3>Step 3 <i class="fa fa-file" aria-hidden="true"></i></h3>        
-      <p>The machine learning model will start generating tags based on the input file or text</p>
-      <!-- <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p> -->
+      <p>The <i><b>machine learning model </b></i> will start generating tags based on the input file or text</p>
     </div>
   </div>
 </div>
 
+
 <div class="jumbotron text-center">
     <h2>Getting Started</h2>
-    <!-- <div class="form-group row">
-        <div class="form-group">
-          <label for="ex3">Put in your text here</label>
-          <input class="form-control" id="ex3" type="text">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputFile"> or choose a file</label><input type="file" id="exampleInputFile" />
-          </div>
-    </div>
-    -->
     <div class="container">
         <div class="row clearfix">
             <div class="col-md-6 col-md-offset-3 column">
                 <form action="http://127.0.0.1:5000/predict" method="POST">
-                    <!-- <div class="form-group"> -->
-                      <!-- <label for="exampleFormControlTextarea1">Text input</label> -->
-                    <input type="text" name="description" placeholder="Product description" required=required />
-
+                    <!-- <input type="text" name="description" placeholder="Product description" required=required /> -->
+                    <textarea class="form-control rounded-0" name="description" required=required placeholder="Product description" id="exampleFormControlTextarea1" rows="5"></textarea>
+                    <br>
                     <button type="submit">Predict</button>
                       <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
                       <input type="submit"> -->
@@ -70,6 +62,7 @@
                 {{ generated_tags }}
             </div>
         </div>
+    </div>
 </div>
 </body>
 </html>

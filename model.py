@@ -28,7 +28,7 @@ def preprocessing_df():
     and fit the label sets binarizer and transform the given label sets.  
     """
 
-    target_variable = model_df['tags'][:n]
+    target_variable = model_df['tags'] #[:n]
     mlb = MultiLabelBinarizer()
     target_variable = mlb.fit_transform(target_variable)
 
@@ -49,7 +49,7 @@ def tfidfvec():
                              token_pattern=r'\w{3,}'
                             )
     
-    product_description = model_df['description'][:n]
+    product_description = model_df['description'] #[:n]
     independent_variable = vectorizer.fit_transform(product_description)
     return independent_variable
 
@@ -100,11 +100,12 @@ svcpipeline, prediction, accScore = linearSVC_pipeline()
 
 
 # saving our trained model, tfidVectorizer and Mlb to pkl format
-pickle.dump(svcpipeline, open('model.pkl', 'wb'))
-pickle.dump(tfidfvec(), open('tfidfVectorizer.pkl', 'wb'))
+# v2 is basically a version with the whole dataset trained/pickeld
+pickle.dump(svcpipeline, open('model.pkl_v2', 'wb'))
+pickle.dump(tfidfvec(), open('tfidfVectorizer_v2.pkl', 'wb'))
 
-model = pickle.load(open('model.pkl', 'rb'))
-vectorizer = pickle.load(open('tfidfVectorizer.pkl', 'rb'))
+model = pickle.load(open('model_v2.pkl', 'rb'))
+vectorizer = pickle.load(open('tfidfVectorizer_v2.pkl', 'rb'))
 
 # with open('text_classifier', 'wb') as picklefile:
 #     pickle.dump(Linear_pipeline,picklefile)
