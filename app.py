@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from sklearn.preprocessing import MultiLabelBinarizer
 import pickle
 import sys
@@ -61,13 +61,24 @@ def generate_tags():
     """
 
     if request.method == 'POST':
-        # TODO ask user how many tags they want to generate
-        tags_size = 20
+
+        user_input_size = request.form.get('tags_size')
+        if user_input_size:
+            tags_size = int(user_input_size) + 1
+        else:
+            tags_size = 20
+
+        # TODO if the user input for tags_size is bigger than the amount of words
+        # in a user input string, return an error
         user_input_string = request.form.get('product_description')
         tags_set = tokenize_user_text_input(user_input_string, tags_size)
 
+        # TODO output should be converted 'nicer' on the UI
+        # when u open the web for the first time it gives 'none' as tags set
+        # this looks ugly on the UI so delete
+
         # Output the generated tags by the machine learning model
-        return render_template("algorithm.html", tags_set = 'The set of generated tags are {}'.format(tags_set))
+        return render_template("algorithm.html", tags_set = tags_set)
     
     return render_template("algorithm.html")
 

@@ -43,6 +43,7 @@
         <div class="row clearfix">
             <div class="col-md-6 col-md-offset-3 column">
                 <form action="http://localhost:5000/generated" method="POST">
+                    <input class="form-control" type="number" name="tags_size" placeholder="The amount of tags you want to generate"  id="example-number-input">
                     <!-- <input type="text" class="form-control" name="description" placeholder="Product description" required=required /> -->
                     <textarea class="form-control rounded-0" name="product_description" required=required placeholder="Product description" id="exampleFormControlTextarea1" rows="5"></textarea>
                     <br>
@@ -50,7 +51,9 @@
                     <button onclick="myFunction()">Copy text</button>
                 </form>
                 <br>
-                {{ tags_set }}
+                {% for tag in tags_set %}
+                  <p> {{ tag }} </p>
+                {% endfor %}
             </div>
         </div>
     </div>
