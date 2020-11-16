@@ -17,7 +17,7 @@
   <h1>Automated Product Tagging</h1>
     <p>Using machine learning and TFIDF-Vectorizer</p> 
     <br><form action = "http://localhost:5000/generated" method = "POST">
-      <p><button>PRODUCT TAGGING ALGORITHM</button></p>
+      <p><button>Go to the Product Tagging Algorithm</button></p>
     </form>
 </div>
 
@@ -47,6 +47,10 @@
             <div class="col-md-6 col-md-offset-3 column">
                 <form action="http://127.0.0.1:5000/predict" method="POST">
                     <textarea class="form-control rounded-0" name="description" required=required placeholder="Product description" id="exampleFormControlTextarea2" rows="5"></textarea>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="customFileLangHTML", name='user_input_file'>
+                      <label class="custom-file-label" for="customFileLangHTML" data-browse="Bestand kiezen"></label>
+                    </div>
                     <br>
                     <button type="submit">Predict</button>
                 </form>
