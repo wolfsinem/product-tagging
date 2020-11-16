@@ -1,5 +1,6 @@
 .jumbotron {
-    background-color: rgb(56, 148, 117);
+    background-color: #38B4BD
+    ;
 }
 
 .jumbotron h1 {
@@ -24,15 +25,16 @@
     cursor: pointer;
     text-align: center;
     text-decoration: none;
-    outline: none;
+    outline: #666;
     color: #fff;
-    background-color: #25beaa;
+    background-color: #38B4BD
+    ;
     border: none;
     border-radius: 15px;
     box-shadow: 0 9px rgba(207, 207, 207, 0.575);
   }
   
-  .jumbotron button:hover {background-color: #ffe02f}
+  .jumbotron button:hover {background-color: #c3c3c3}
   
   .jumbotron button:active {
     background-color: #ffe02f;
