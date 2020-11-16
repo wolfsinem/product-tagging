@@ -2,8 +2,11 @@ from flask import Flask, render_template, request, flash
 from sklearn.preprocessing import MultiLabelBinarizer
 import pickle
 import sys
+import os 
+import csv
 
 sys.path.append('/Users/wolfsinem/product-tagging')
+
 from product_tagging.tags_generator import tokenized_list
 from deploy_tags_generator_text import tokenize_user_text_input
 
@@ -25,8 +28,13 @@ with open('text_classifier.pkl', 'rb') as training_model:
 with open('tfidfvectorizer.pkl', 'rb') as tfvectorizer:
     vectorizer = pickle.load(tfvectorizer)
 
+
 # Initializing the Flask app 
 app = Flask(__name__)
+
+# Creating a directory in a known location to save the user input files to 
+# uploads_dir = os.path.join(app.instance_path, 'uploads')
+# os.makedirs(uploads_dir, exists_ok=True)
 
 
 @app.route('/')
@@ -52,6 +60,28 @@ def predict():
 
         # Output the generated tags by the machine learning model
         return render_template("index.html", generated_tags = 'The set of predicted tags are {}'.format(generated_tags))
+
+
+@app.route('/read_csv', methods=['POST', 'GET'])
+def read_csv():
+    """This predict function will load the persisted model into memory when the 
+    application starts and create an API endpoint that takes the input CSV file, 
+    transforms it into the appropiate format and returns a new CSV file with a
+    new column; tags. 
+    """
+    
+    if request.method == 'POST':
+
+        user_input = request.form['user_input_file']
+        data = []
+
+        with open(user_input) as file:
+            csvfile = csv.reader(file)
+            for row in csvfile:
+                data.append(row) 
+
+        return render_template('index.html', data=data)  
+
 
 
 @app.route('/generated', methods=['POST', 'GET'])
