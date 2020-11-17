@@ -1,10 +1,14 @@
 .jumbotron {
-    background-color: #38B4BD
+    background-color: #203031
     ;
 }
 
 .jumbotron h1 {
     color: #ffffff;
+}
+
+.jumbotron p, h2 {
+  color: #ffffff;
 }
 
 /* .form-control {
@@ -26,8 +30,8 @@
     text-align: center;
     text-decoration: none;
     outline: #666;
-    color: #fff;
-    background-color: #38B4BD
+    color: rgb(0, 0, 0);
+    background-color: #ffffff
     ;
     border: none;
     border-radius: 15px;
@@ -37,7 +41,7 @@
   .jumbotron button:hover {background-color: #c3c3c3}
   
   .jumbotron button:active {
-    background-color: #ffe02f;
+    background-color: #0000003b;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
   }

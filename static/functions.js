@@ -1,5 +1,5 @@
 
-
+// copy text on tagging algorithm page
 function myFunction() {
     var copyText = document.getElementById("exampleFormControlTextarea1");
     copyText.select();
@@ -7,3 +7,5 @@ function myFunction() {
     document.execCommand("copy");
     alert("Copied the text: " + copyText.value);
   }
+
+  
