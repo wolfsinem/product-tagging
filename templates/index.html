@@ -47,18 +47,24 @@
             <div class="col-md-6 col-md-offset-3 column">
                 <form action="http://127.0.0.1:5000/predict" method="POST">
                     <textarea class="form-control rounded-0" name="description" required=required placeholder="Product description" id="exampleFormControlTextarea2" rows="5"></textarea>
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="customFileLangHTML", name='user_input_file'>
-                      <label class="custom-file-label" for="customFileLangHTML" data-browse="Bestand kiezen"></label>
-                    </div>
                     <br>
                     <button type="submit">Predict</button>
-                </form>
-                <br>
-                {{ generated_tags }}
+                    {{ generated_tags }}
+                </form> 
             </div>
         </div>
     </div>
+    <!-- <br> -->
+      <!-- <h2>Select your file</h2>
+        <form action="/predict" method="POST" enctype="multipart/form-data">
+            <div class="file-field">
+                <div class="btn btn-outline-success btn-rounded waves-effect btn-sm float-left">
+                    <input type="file" class="custom-file-input" name="csv_file" id="csv_file">
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-outline-secondary">Upload</button>
+        </form> -->
 </div>
 </body>
 </html>
