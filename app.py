@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect, make_response
 from sklearn.preprocessing import MultiLabelBinarizer
 import pickle
 import sys
@@ -62,6 +62,10 @@ def predict():
         return render_template("index.html", generated_tags = 'The set of predicted tags are {}'.format(generated_tags))
 
 
+# move to config file
+app.config["IMAGE_UPLOADS"] = '/Users/wolfsinem/product-tagging/static/img/uploads'
+
+
 @app.route('/read_csv', methods=['POST', 'GET'])
 def read_csv():
     """This predict function will load the persisted model into memory when the 
@@ -70,17 +74,17 @@ def read_csv():
     new column; tags. 
     """
     
-    if request.method == 'POST':
+    if request.method == "POST":
 
-        user_input = request.form['user_input_file']
-        data = []
+        if request.files:
 
-        with open(user_input) as file:
-            csvfile = csv.reader(file)
-            for row in csvfile:
-                data.append(row) 
+            image = request.files["image"]
+            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
+            print('The uploaded file: {} has been saved into the directory'.format(image.filename))
+            return redirect(request.url)
 
-        return render_template('index.html', data=data)  
+
+    return render_template("prediction.html")
 
 
 
