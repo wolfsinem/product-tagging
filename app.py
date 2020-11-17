@@ -31,10 +31,7 @@ with open('tfidfvectorizer.pkl', 'rb') as tfvectorizer:
 
 # Initializing the Flask app 
 app = Flask(__name__)
-
-# Creating a directory in a known location to save the user input files to 
-# uploads_dir = os.path.join(app.instance_path, 'uploads')
-# os.makedirs(uploads_dir, exists_ok=True)
+app.config.from_object("config.DevelopmentConfig")
 
 
 @app.route('/')
@@ -63,7 +60,7 @@ def predict():
 
 
 # move to config file
-app.config["IMAGE_UPLOADS"] = '/Users/wolfsinem/product-tagging/static/img/uploads'
+# app.config["IMAGE_UPLOADS"] = '/Users/wolfsinem/product-tagging/static/img/uploads'
 
 
 @app.route('/read_csv', methods=['POST', 'GET'])
