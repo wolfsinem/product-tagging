@@ -12,8 +12,6 @@ from deploy_tags_generator_text import tokenize_user_text_input
 
 
 N = 2000 
-
- # Load in our dataframe from the tags_generator file
 MODEL = tokenized_list()
 
 # Preprocessing 
@@ -55,12 +53,7 @@ def predict():
         label = model.predict(user_input_string)
         generated_tags = mlb.inverse_transform(label)
 
-        # Output the generated tags by the machine learning model
         return render_template("index.html", generated_tags = generated_tags)
-
-
-# move to config file
-# app.config["FILE_UPLOADS"] = '/Users/wolfsinem/product-tagging/static/img/uploads'
 
 
 @app.route('/read_csv', methods=['POST', 'GET'])
@@ -82,7 +75,6 @@ def read_csv():
 
 
     return render_template("prediction.html")
-
 
 
 @app.route('/generated', methods=['POST', 'GET'])
@@ -112,8 +104,6 @@ def generate_tags():
         return render_template("algorithm.html", tags_set = tags_set)
     
     return render_template("algorithm.html")
-
-
 
 
 if __name__ == "__main__":
