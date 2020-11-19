@@ -56,7 +56,7 @@ def predict():
         generated_tags = mlb.inverse_transform(label)
 
         # Output the generated tags by the machine learning model
-        return render_template("index.html", generated_tags = 'The set of predicted tags are {}'.format(generated_tags))
+        return render_template("index.html", generated_tags = generated_tags)
 
 
 # move to config file
