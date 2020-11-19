@@ -34,7 +34,7 @@ app = Flask(__name__)
 app.config.from_object("config.DevelopmentConfig")
 
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def index():
     """Setting up the main route"""
     return render_template('index.html')
