@@ -13,14 +13,13 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the nee
 pip install -r requirements.txt
 ```
 
-## Usage
+## Run
 
 ```python
-import
-
+flask run
 ```
+or 
 
-## Contributing
-
-
-## License
+```python
+python app.y
+```
