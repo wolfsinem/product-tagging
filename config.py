@@ -3,7 +3,7 @@ class Config(object):
     DEBUG = False
     TESTING = False
 
-    IMAGE_UPLOADS = '/Users/wolfsinem/product-tagging/static/img/uploads'
+    FILE_UPLOADS = '/Users/wolfsinem/product-tagging/static/data/uploads'
 
 
 class ProductionConfig(Config):
@@ -13,7 +13,7 @@ class ProductionConfig(Config):
 class DevelopmentConfig(Config):
     DEBUG = True
 
-    IMAGE_UPLOADS = '/Users/wolfsinem/product-tagging/static/img/uploads'
+    FILE_UPLOADS = '/Users/wolfsinem/product-tagging/static/data/uploads'
     SESSION_COOKIE_SECURE = False
 
 

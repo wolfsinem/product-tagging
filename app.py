@@ -60,7 +60,7 @@ def predict():
 
 
 # move to config file
-# app.config["IMAGE_UPLOADS"] = '/Users/wolfsinem/product-tagging/static/img/uploads'
+# app.config["FILE_UPLOADS"] = '/Users/wolfsinem/product-tagging/static/img/uploads'
 
 
 @app.route('/read_csv', methods=['POST', 'GET'])
@@ -76,7 +76,7 @@ def read_csv():
         if request.files:
 
             image = request.files["image"]
-            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
+            image.save(os.path.join(app.config["FILE_UPLOADS"], image.filename))
             print('The uploaded file: {} has been saved into the directory'.format(image.filename))
             return redirect(request.url)
 
