@@ -49,8 +49,15 @@
                     <textarea class="form-control rounded-0" name="description" required=required placeholder="Product description" id="exampleFormControlTextarea2" rows="5"></textarea>
                     <br>
                     <button type="submit">Predict</button>
-                    {{ generated_tags }}
-                </form> 
+                    <br>
+                    <br>
+                    <p>The set of predicted tags are: </p>
+                </form>
+
+                {% for tag in generated_tags %}
+                    <p> {{ tag }} </p>
+                {% endfor %}
+
             </div>
         </div>
     </div>
