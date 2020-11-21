@@ -2,6 +2,29 @@
   background-color: #203031;
 }
 
+.topnav {
+  overflow: hidden;
+}
+
+.topnav a {
+  float: right;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* .topnav a.active {
+  background-color: #4cacaf;
+  color: white;
+} */
+
 .jumbotron {
     background-color: #203031;
 }
@@ -18,37 +41,26 @@
   color: #000000;
 }
 
-/* .form-control {
-    width:500px;
-    height:100px;
+.jumbotron button {
+  display: inline-block;
+  /* padding: 15px 25px; */
+  /* font-size: 24px; */
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: #666;
+  color: rgb(0, 0, 0);
+  background-color: #ffffff
+  ;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px rgba(207, 207, 207, 0.575);
+}
 
-} */
+.jumbotron button:hover {background-color: #c3c3c3}
 
-/* .jumbotron uppersection button {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  } */
-
-
-  .jumbotron button {
-    display: inline-block;
-    /* padding: 15px 25px; */
-    /* font-size: 24px; */
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: #666;
-    color: rgb(0, 0, 0);
-    background-color: #ffffff
-    ;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px rgba(207, 207, 207, 0.575);
-  }
-  
-  .jumbotron button:hover {background-color: #c3c3c3}
-  
-  .jumbotron button:active {
-    background-color: #0000003b;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-  }
+.jumbotron button:active {
+  background-color: #0000003b;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
