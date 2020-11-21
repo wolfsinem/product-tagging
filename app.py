@@ -87,7 +87,7 @@ def generate_tags():
 
         user_input_size = request.form.get('tags_size')
         if user_input_size:
-            tags_size = int(user_input_size) + 1
+            tags_size = int(user_input_size) # + 1
         else:
             tags_size = 20
 
