@@ -8,7 +8,7 @@ import csv
 sys.path.append('/Users/wolfsinem/product-tagging')
 
 from product_tagging.tags_generator import tokenized_list
-from deploy_tags_generator_text import tokenize_user_text_input
+from deploy_nltk import tokenize_user_text_input
 
 
 N = 2000 
@@ -17,6 +17,7 @@ MODEL = tokenized_list()
 # Preprocessing 
 model_df = MODEL[:N]
 target_variable = model_df['tags']
+
 mlb = MultiLabelBinarizer()
 target_variable = mlb.fit_transform(target_variable)
 
@@ -25,7 +26,6 @@ with open('text_classifier.pkl', 'rb') as training_model:
     model = pickle.load(training_model)
 with open('tfidfvectorizer.pkl', 'rb') as tfvectorizer:
     vectorizer = pickle.load(tfvectorizer)
-
 
 # Initializing the Flask app 
 app = Flask(__name__)
