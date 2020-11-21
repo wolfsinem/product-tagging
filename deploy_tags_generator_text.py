@@ -1,6 +1,6 @@
 """
 This file is only for the deployment of the tags generator based on the input 
-text give by the user. 
+text given by the user. We will use the NLTK library for this http://www.nltk.org/howto/
 """
 
 from collections import Counter
@@ -16,7 +16,6 @@ import nltk
 # This is almost the same as the original one in our tags_generator.py file
 # but since we only take in the user text input rather than a CSV file its slightly
 # different.
-
 
 def tokenize_user_text_input(sentence, size_tags):
     """This function splits a string into substrings using a regular expression
@@ -46,17 +45,25 @@ def tokenize_user_text_input(sentence, size_tags):
     return token_lists    
 
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
 
-#     user_input = """The legend continues to live in the Nike Air Force 1 '07 - Men's, a 
-#                 modern version of the iconic AF1, combining classic style and modern 
-#                 details. The low design offers optimum soil adhesion and a classic 
-#                 look. This version of the Nike Air Force 1 features rippled leather 
-#                 edges for a cleaner, slimmer line and more refined details. The 
-#                 leather and fabric upper features external layers positioned at 
-#                 strategic points for a lifetime durability and support. The 
-#                 perforated inserts favor the breathability to keep the foot always 
-#                 fresh and dry.")"""
-#     N = 20
-#     generator = tokenize_user_text_input(user_input,N)
-#     print(generator)
+    # user_input = """The legend continues to live in the Nike Air Force 1 '07 - Men's, a 
+    #             modern version of the iconic AF1, combining classic style and modern 
+    #             details. The low design offers optimum soil adhesion and a classic 
+    #             look. This version of the Nike Air Force 1 features rippled leather 
+    #             edges for a cleaner, slimmer line and more refined details. The 
+    #             leather and fabric upper features external layers positioned at 
+    #             strategic points for a lifetime durability and support. The 
+    #             perforated inserts favor the breathability to keep the foot always 
+    #             fresh and dry.")"""
+
+    user_input = input("Enter a (product) description here: \n")
+    print("\n")
+
+    N = 10
+    generator = tokenize_user_text_input(user_input,N)
+    print("The generated set of tags are: \n")
+    for tag in generator:
+        print(tag)
+
+    print("\n")
