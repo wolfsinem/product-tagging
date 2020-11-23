@@ -1,9 +1,8 @@
-from flask import Flask, render_template, request, flash, redirect, make_response
+from flask import Flask, render_template, request, redirect
 from sklearn.preprocessing import MultiLabelBinarizer
 import pickle
 import sys
 import os 
-import csv
 
 sys.path.append('/Users/wolfsinem/product-tagging')
 
@@ -22,9 +21,10 @@ mlb = MultiLabelBinarizer()
 target_variable = mlb.fit_transform(target_variable)
 
 # Open our classifier and vectorizer pickle files
-with open('text_classifier.pkl', 'rb') as training_model:
+with open('/Users/wolfsinem/product-tagging/classifier2', 'rb') as training_model:
     model = pickle.load(training_model)
-with open('tfidfvectorizer.pkl', 'rb') as tfvectorizer:
+
+with open('/Users/wolfsinem/product-tagging/vect2', 'rb') as tfvectorizer:
     vectorizer = pickle.load(tfvectorizer)
 
 # Initializing the Flask app 
