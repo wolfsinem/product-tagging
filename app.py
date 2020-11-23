@@ -21,10 +21,10 @@ mlb = MultiLabelBinarizer()
 target_variable = mlb.fit_transform(target_variable)
 
 # Open our classifier and vectorizer pickle files
-with open('/Users/wolfsinem/product-tagging/classifier2', 'rb') as training_model:
+with open('/Users/wolfsinem/product-tagging/data/classifier', 'rb') as training_model:
     model = pickle.load(training_model)
 
-with open('/Users/wolfsinem/product-tagging/vect2', 'rb') as tfvectorizer:
+with open('/Users/wolfsinem/product-tagging/data/vectorizer', 'rb') as tfvectorizer:
     vectorizer = pickle.load(tfvectorizer)
 
 # Initializing the Flask app 
