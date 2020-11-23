@@ -17,8 +17,9 @@ from product_tagging.tags_generator import tokenized_list
 
 
 # created dataframe with new tags column 
-n = 2000 # number of rows
+n = 5000 # number of rows
 model_df = tokenized_list()
+model_df = model_df[:n]
 
 
 def preprocessing_df():
@@ -28,7 +29,7 @@ def preprocessing_df():
     and fit the label sets binarizer and transform the given label sets.  
     """
 
-    target_variable = model_df['tags'] #[:n]
+    target_variable = model_df['tags']
     mlb = MultiLabelBinarizer()
     target_variable = mlb.fit_transform(target_variable)
 
@@ -49,7 +50,7 @@ def tfidfvec():
                              token_pattern=r'\w{3,}'
                             )
     
-    product_description = model_df['description'] #[:n]
+    product_description = model_df['description']
     independent_variable = vectorizer.fit_transform(product_description)
     return independent_variable
 
@@ -96,19 +97,11 @@ def linearSVC_pipeline(random_state=42, tol=1e-1, C=8.385, n_jobs=-1):
 
 
 svcpipeline, prediction, accScore = linearSVC_pipeline()
-# print(accScore)
-
+print("Accuracy score with {} trained rows: {}".format(n,accScore))
 
 # saving our trained model, tfidVectorizer and Mlb to pkl format
-# v2 is basically a version with the whole dataset trained/pickeld
-pickle.dump(svcpipeline, open('model.pkl_v2', 'wb'))
-pickle.dump(tfidfvec(), open('tfidfVectorizer_v2.pkl', 'wb'))
+with open('text_classifier.pkl', 'wb') as picklefile:
+    pickle.dump(svcpipeline,picklefile)
 
-model = pickle.load(open('model_v2.pkl', 'rb'))
-vectorizer = pickle.load(open('tfidfVectorizer_v2.pkl', 'rb'))
-
-# with open('text_classifier', 'wb') as picklefile:
-#     pickle.dump(Linear_pipeline,picklefile)
-    
-# with open('vect', 'wb') as picklefile:
-#     pickle.dump(vectorizer,picklefile)
+with open('tfidfvectorizer.pkl', 'wb') as picklefile:
+    pickle.dump(tfidfvec(),picklefile)
