@@ -29,13 +29,16 @@ def create_df(filepath='/Users/wolfsinem/product-tagging/data/flipkart_com-ecomm
     return model_df
 
 
-def tokenize_string(sentence, size_tags=5):
+def tokenize_string(sentence, size_tags=100):
     """This function splits a string into substrings using a regular expression
      using RegexpTokenizer. Additionally it counts the occurence of each word
      and returns the top 5 words which can be used as tags
 
     :param sentence: Text description of a product
     :type sentence: string
+
+    :param size_tags: amount of tags you want to create.
+    :type size_tags: int.
     """
 
     tokenizer = nltk.RegexpTokenizer(r"\w+")
