@@ -1,6 +1,4 @@
 # Machine Learning - model training
-from numpy.lib.function_base import vectorize
-from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer, TfidfVectorizer
 from sklearn.preprocessing import MultiLabelBinarizer
@@ -15,18 +13,15 @@ from sklearn.metrics import accuracy_score
 import pickle
 from product_tagging.tags_generator import tokenized_list
 
-
-# created dataframe with new tags column 
-n = 5000 # number of rows
+n = 2000
 model_df = tokenized_list()
 model_df = model_df[:n]
-
 
 def preprocessing_df():
     """This function preprocesses the newly created dataframe with the tags 
     column. It takes the target variable, which are the tags and uses the
     MultiLabelBinarizer. This allows us to encode multiple labels per instance
-    and fit the label sets binarizer and transform the given label sets.  
+    and fit the label sets binarizer and transform the given label sets. 
     """
 
     target_variable = model_df['tags']
@@ -52,6 +47,7 @@ def tfidfvec():
     
     product_description = model_df['description']
     independent_variable = vectorizer.fit_transform(product_description)
+    
     return independent_variable
 
 
@@ -90,18 +86,12 @@ def linearSVC_pipeline(random_state=42, tol=1e-1, C=8.385, n_jobs=-1):
                                                 n_jobs = n_jobs)),
             ])
     
-    svcpipeline = Linear_pipeline.fit(X_train, y_train)
+    SVCpipeline = Linear_pipeline.fit(X_train, y_train)
     prediction = Linear_pipeline.predict(X_test)
     accScore = accuracy_score(y_test, prediction)
-    return svcpipeline, prediction,accScore
+
+    return SVCpipeline, prediction, accScore
 
 
-svcpipeline, prediction, accScore = linearSVC_pipeline()
+SVCpipeline, prediction, accScore = linearSVC_pipeline()
 print("Accuracy score with {} trained rows: {}".format(n,accScore))
-
-# saving our trained model, tfidVectorizer and Mlb to pkl format
-with open('text_classifier.pkl', 'wb') as picklefile:
-    pickle.dump(svcpipeline,picklefile)
-
-with open('tfidfvectorizer.pkl', 'wb') as picklefile:
-    pickle.dump(tfidfvec(),picklefile)
