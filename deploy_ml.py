@@ -1,3 +1,13 @@
+"""This is an example file of how you can deploy your Machine Learning model
+after you've trained it and saved it into pickle files.
+
+At the end of this process you would have 2 different pickle files:
+- classifier; which is the LinearSVC pipeline model
+- vectorizer; which is the TfIdfVectorizer model
+
+See: Jupyter Notebook file 'Deployment' for more information. 
+"""
+
 # Machine Learning - model training
 from sklearn.preprocessing import MultiLabelBinarizer
 
@@ -8,7 +18,7 @@ sys.path.append('/Users/wolfsinem/product-tagging')
 from product_tagging.tags_generator import tokenized_list
 
 # Limit total records so it doesn't take long to process.
-N = 2000
+N = 10000
 
 # Load in our dataframe from the tags_generator file
 MODEL = tokenized_list()
