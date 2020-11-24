@@ -10,7 +10,7 @@ from product_tagging.tags_generator import tokenized_list
 from deploy_nltk import tokenize_user_text_input
 
 
-N = 2000 
+N = 5000 
 MODEL = tokenized_list()
 
 # Preprocessing 
@@ -21,10 +21,10 @@ mlb = MultiLabelBinarizer()
 target_variable = mlb.fit_transform(target_variable)
 
 # Open our classifier and vectorizer pickle files
-with open('/Users/wolfsinem/product-tagging/data/classifier', 'rb') as training_model:
+with open('/Users/wolfsinem/product-tagging/data/classifier2', 'rb') as training_model:
     model = pickle.load(training_model)
 
-with open('/Users/wolfsinem/product-tagging/data/vectorizer', 'rb') as tfvectorizer:
+with open('/Users/wolfsinem/product-tagging/data/vect2', 'rb') as tfvectorizer:
     vectorizer = pickle.load(tfvectorizer)
 
 # Initializing the Flask app 
