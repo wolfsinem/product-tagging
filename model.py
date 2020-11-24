@@ -1,6 +1,6 @@
 # Machine Learning - model training
 from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer, TfidfVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import MultiLabelBinarizer
 
 from sklearn.svm import LinearSVC
@@ -10,7 +10,6 @@ from sklearn.multiclass import OneVsRestClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score
 
-import pickle
 from product_tagging.tags_generator import tokenized_list
 
 n = 2000
