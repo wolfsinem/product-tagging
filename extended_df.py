@@ -26,6 +26,7 @@ def model_dataframe():
 
     df = load_df()
     df.dropna(inplace=True)
+    df.drop_duplicates(subset=['description'],inplace=True)
     if 'product_name' and 'description' in df.columns:
         model_df = df[['product_name','description']]
         pd.options.mode.chained_assignment = None 
