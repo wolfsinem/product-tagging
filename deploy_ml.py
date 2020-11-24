@@ -1,5 +1,6 @@
 """This is an example file of how you can deploy your Machine Learning model
 after you've trained it and saved it into pickle files.
+
 At the end of this process you would have 2 different pickle files:
 - classifier; which is the LinearSVC pipeline model
 - vectorizer; which is the TfIdfVectorizer model
@@ -21,7 +22,7 @@ from sklearn.multiclass import OneVsRestClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score
 
-n = 2000 # number of rows
+n = 5000 # number of rows
 model_df = tokenized_list()
 model_df = model_df[:n]
 
@@ -73,10 +74,10 @@ with open('vect2', 'wb') as picklefile:
     pickle.dump(vectorizer,picklefile)
 
 # open the pickle files 
-with open('/Users/wolfsinem/product-tagging/classifier2', 'rb') as training_model:
+with open('/Users/wolfsinem/product-tagging/data/classifier2', 'rb') as training_model:
     model = pickle.load(training_model)
 
-with open('/Users/wolfsinem/product-tagging/vect2', 'rb') as training_model:
+with open('/Users/wolfsinem/product-tagging/data/vect2', 'rb') as training_model:
     vectorizer = pickle.load(training_model)
 
 
@@ -88,7 +89,11 @@ user_input_string = ["""Key Features of Alisha Solid Womens Cycling Shorts Cotto
                     Gentle Machine Wash in Lukewarm Water, Do Not Bleach Additional 
                     Details Style Code ALTHT_3P_21 In the Box 3 shorts"""]
 
+
 user_input_string = vectorizer.transform(user_input_string).toarray()
 label = model.predict(user_input_string)
 tags = mlb.inverse_transform(label)
 print(tags)
+#  [('alisha', 'care', 'cotton', 'cycling', 'gentle', 'ideal', 'lukewarm', 
+# 'lycra', 'machine', 'navy', 'pack', 'package', 'pattern', 'red', 'shorts', 
+# 'solid', 'wash', 'water', 'women')]
