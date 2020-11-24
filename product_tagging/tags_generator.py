@@ -29,7 +29,7 @@ def create_df(filepath='/Users/wolfsinem/product-tagging/data/flipkart_com-ecomm
     return model_df
 
 
-def tokenize_string(sentence, size_tags=5):
+def tokenize_string(sentence, size_tags=20):
     """This function splits a string into substrings using a regular expression
      using RegexpTokenizer. Additionally it counts the occurence of each word
      and returns the top 5 words which can be used as tags
@@ -102,4 +102,3 @@ if __name__ == "__main__":
 
     # exporting it to CSV
     export_csv(df=df_with_tags)
-    
