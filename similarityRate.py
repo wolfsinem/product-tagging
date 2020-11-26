@@ -1,7 +1,4 @@
 import sys
-from numpy.core.fromnumeric import prod
-import pandas as pd
-import numpy as np
 import nltk 
 # nltk.download('averaged_perceptron_tagger') # download once
 
@@ -125,9 +122,8 @@ def lemma_tag(set_tags):
     return [i for i in lemm_set if len(i) > 1] # remove words with single character
 
 
-
 # set of tags we used to generate
-product_description = df.loc[19970]['description']
+product_description = 'You will be bombarded with complimenting glances as you walk out wearing this black coloured analog watch. Featuring a stylish dial and attractive leather strap, this watch will be a classy touch to your look. This stylish accessory is a fine pick to flaunt with casuals as well as with formals too.'
 
 # new set of tags
 new_set = lemma_tag(product_description)
