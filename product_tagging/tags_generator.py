@@ -48,7 +48,8 @@ def tokenize_string(sentence, size_tags=20):
     stop_words = set(stopwords.words('english')) 
     manual_filtered_words = {'details','fabric','key','features','sales',
                             'number','contents','type','general', 
-                            'specifications'}
+                            'specifications', 'product', 'material','price',
+                            'additional' 'code'}
 
     filter_tokens = [w for w in new_words if not w in stop_words and not w in manual_filtered_words]
     count_terms = Counter(filter_tokens).most_common(size_tags)
