@@ -7,8 +7,7 @@ import os
 sys.path.append('/Users/wolfsinem/product-tagging')
 
 from product_tagging.tags_generator import tokenized_list
-from deploy_nltk import tokenize_user_text_input
-
+from similarityRate import lemma_tag
 
 N = 5000 
 MODEL = tokenized_list()
@@ -91,16 +90,13 @@ def generate_tags():
         else:
             tags_size = 20
 
-        # TODO if the user input for tags_size is bigger than the amount of words
-        # in a user input string, return an error
         user_input_string = request.form.get('product_description')
-        tags_set = tokenize_user_text_input(user_input_string, tags_size)
+        tags_set = lemma_tag(user_input_string, tags_size)
 
         # TODO output should be converted 'nicer' on the UI
         # when u open the web for the first time it gives 'none' as tags set
         # this looks ugly on the UI so delete
 
-        # Output the generated tags by the machine learning model
         return render_template("algorithm.html", tags_set = tags_set)
     
     return render_template("algorithm.html")

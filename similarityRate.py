@@ -1,6 +1,8 @@
 import sys
 import nltk 
-# nltk.download('averaged_perceptron_tagger') # download once
+# nltk.download('averaged_perceptron_tagger')
+# nltk.download('stopwords')
+# nltk.download('wordnet')
 
 # python built in library to calculate the similarity
 import difflib
@@ -9,6 +11,8 @@ from nltk.stem import WordNetLemmatizer
 
 sys.path.append('/Users/wolfsinem/product-tagging/product_tagging')
 from tags_generator import tokenize_string
+
+from deploy_nltk import tokenize_user_text_input
 
 
 df = model_dataframe()
@@ -99,32 +103,31 @@ def similarity_rate(description):
     return scores
 
 
-def lemma_tag(set_tags): 
-    """This function uses the NLTK lemmatizer function. Lemmatization, unlike Stemming, 
+def lemma_tag(set_tags, size_tags):
+    """This function uses the NLTK lemmatizer function. Lemmatization, unlike Stemming,
     reduces the inflected words properly ensuring that the root word belongs to the language
     See: https://www.datacamp.com/community/tutorials/stemming-lemmatization-python
 
     To reduce the amount of duplicates in a set of tags we will thus use lemmatization.
     Words like 'weight' and 'weights' will be considered the same and be saved
-    as 'weight'. 
+    as 'weight'.
     """
 
     lemmatizer = WordNetLemmatizer()
 
     lemm_set = []
-    for word in tokenize_string(set_tags):
+    for word in tokenize_user_text_input(set_tags, size_tags):
         tag = lemmatizer.lemmatize(word)
         lemm_set.append(tag)
-    
+
     lemm_set = list(set(lemm_set))
-    lemm_set = [x for x in lemm_set if not any(c.isdigit() for c in x)] # remove digits
-    
+    lemm_set = [x for x in lemm_set if not any(c.isdigit() for c in x)]
+
     return [i for i in lemm_set if len(i) > 1] # remove words with single character
 
-
-# set of tags we used to generate
-product_description = 'You will be bombarded with complimenting glances as you walk out wearing this black coloured analog watch. Featuring a stylish dial and attractive leather strap, this watch will be a classy touch to your look. This stylish accessory is a fine pick to flaunt with casuals as well as with formals too.'
-
-# new set of tags
-new_set = lemma_tag(product_description)
-print(new_set)
+# # set of tags we used to generate
+# product_description = df.loc[2]['description']
+# print(product_description)
+# # new set of tags
+# new_set = lemma_tag(product_description)
+# print(new_set)
