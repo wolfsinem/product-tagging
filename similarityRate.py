@@ -122,6 +122,7 @@ def lemma_tag(set_tags, size_tags):
 
     lemm_set = list(set(lemm_set))
     lemm_set = [x for x in lemm_set if not any(c.isdigit() for c in x)]
+    lemm_set = [x for x in lemm_set if not x[-3:] == "ing"]
 
     return [i for i in lemm_set if len(i) > 1] # remove words with single character
 
