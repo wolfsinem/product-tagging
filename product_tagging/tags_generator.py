@@ -78,15 +78,13 @@ def tokenized_list():
     return model_df
 
 
-def export_csv(df):
+def export_csv(df, outname):
     """This function will export the final df with the newly added 'tags' 
     column to CSV. 
 
     :param df: model dataframe with newly created tags column
     :type df: string
     """
-    
-    outname = 'tagged_products.csv'
 
     outdir = './tagged_csv'
     if not os.path.exists(outdir):
