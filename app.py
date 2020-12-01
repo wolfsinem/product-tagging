@@ -73,6 +73,12 @@ def predict():
         return render_template("index.html", generated_tags = generated_tags)
 
 
+@app.route('/warning', methods=['POST', 'GET'])
+def send_warning():
+    """Function to send out the warning template to user."""
+    return render_template('warning.html')
+
+
 @app.route('/read_csv', methods=['POST', 'GET'])
 def read_csv():
     """This predict function will load the persisted model into memory when the 
@@ -95,6 +101,10 @@ def read_csv():
                 file.save(os.path.join(app.config["FILE_UPLOADS"], file.filename))
                 print('The uploaded file: {} has been saved into the directory'.format(file.filename))
                 return redirect(request.url)
+
+            else:
+                print("That file extension is not allowed")
+                return send_warning()
 
     return render_template("prediction.html")
 
