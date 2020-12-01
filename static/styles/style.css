@@ -1,5 +1,5 @@
 .top-logo {
-  background-color: #203031;
+  background-color: #137eca;
 }
 
 .topnav {
@@ -20,13 +20,8 @@
   color: black;
 }
 
-/* .topnav a.active {
-  background-color: #4cacaf;
-  color: white;
-} */
-
 .jumbotron {
-    background-color: #203031;
+    background-color: #137eca;
 }
 
 .jumbotron h1 {
@@ -43,8 +38,6 @@
 
 .jumbotron button {
   display: inline-block;
-  /* padding: 15px 25px; */
-  /* font-size: 24px; */
   cursor: pointer;
   text-align: center;
   text-decoration: none;
