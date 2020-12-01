@@ -31,6 +31,24 @@ app = Flask(__name__)
 app.config.from_object("config.DevelopmentConfig")
 
 
+def allowed_file(filename):
+    """To make sure the user can't upload any type of file we will use this
+    function to limit the input. 
+
+    :param filename: 
+    :type filename:
+    """ 
+    if not "." in filename:
+        return False
+
+    ext = filename.rsplit(".", 1)[1]
+
+    if ext.upper() in app.config["ALLOWED_FILE_EXTENSIONS"]:
+        return True
+    else:
+        return False
+
+
 @app.route('/', methods=['POST', 'GET'])
 def index():
     """Setting up the main route"""
@@ -67,11 +85,16 @@ def read_csv():
 
         if request.files:
 
-            image = request.files["image"]
-            image.save(os.path.join(app.config["FILE_UPLOADS"], image.filename))
-            print('The uploaded file: {} has been saved into the directory'.format(image.filename))
-            return redirect(request.url)
+            file = request.files["file"]
 
+            if file.filename == "":
+                print("There is no file")
+                return redirect(request.url)
+
+            if allowed_file(file.filename):
+                file.save(os.path.join(app.config["FILE_UPLOADS"], file.filename))
+                print('The uploaded file: {} has been saved into the directory'.format(file.filename))
+                return redirect(request.url)
 
     return render_template("prediction.html")
 
@@ -92,10 +115,6 @@ def generate_tags():
 
         user_input_string = request.form.get('product_description')
         tags_set = lemma_tag(user_input_string, tags_size)
-
-        # TODO output should be converted 'nicer' on the UI
-        # when u open the web for the first time it gives 'none' as tags set
-        # this looks ugly on the UI so delete
 
         return render_template("algorithm.html", tags_set = tags_set)
     
