@@ -100,4 +100,4 @@ if __name__ == "__main__":
     df_with_tags = tokenized_list()
 
     # exporting it to CSV
-    export_csv(df=df_with_tags)
+    export_csv(df_with_tags, 'blabla.csv')
