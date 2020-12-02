@@ -1,5 +1,4 @@
 import os
-from os import name
 import sys
 
 # Data processing
@@ -138,8 +137,6 @@ def export_extendedDF(path="/Users/wolfsinem/product-tagging/static/data/exports
         df.to_csv(full_path)
     else:
         raise ValueError("This {} path file does not exist".format(path))
-
-
 
 
 if __name__ == "__main__":
