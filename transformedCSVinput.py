@@ -27,6 +27,8 @@ def retrieve_csv(path="/Users/wolfsinem/product-tagging/static/data/uploads"):
         if fname.startswith('sub') and fname.endswith(".csv"):
             paths = [os.path.join(path, basename) for basename in files]
             return max(paths, key=os.path.getctime)
+        else:
+            raise ValueError("The file we are looking for isnt't there")
 
 
 def model_dataframe():
@@ -135,9 +137,10 @@ def export_extendedDF(path="/Users/wolfsinem/product-tagging/static/data/exports
         outname = "extended-" + os.path.basename(os.path.normpath(retrieve_csv()))
         full_path = os.path.join(path, outname) 
         df.to_csv(full_path)
+        
     else:
         raise ValueError("This {} path file does not exist".format(path))
 
 
 if __name__ == "__main__":
-    export_extendedDF() 
+    export_extendedDF()
