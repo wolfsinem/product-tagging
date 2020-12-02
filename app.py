@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, send_from_directory
 from sklearn.preprocessing import MultiLabelBinarizer
 import pickle
 import sys
@@ -9,8 +9,12 @@ sys.path.append('/Users/wolfsinem/product-tagging')
 from product_tagging.tags_generator import tokenized_list
 from similarityRate import lemma_tag
 
+# from transformedCSVinput import export_extendedDF, retrieve_csv
+
+
 N = 5000 
-MODEL = tokenized_list()
+MODEL = tokenized_list() # sys.append =----> export-user-input for new extended df
+
 
 # Preprocessing 
 model_df = MODEL[:N]
@@ -19,12 +23,14 @@ target_variable = model_df['tags']
 mlb = MultiLabelBinarizer()
 target_variable = mlb.fit_transform(target_variable)
 
+
 # Open our classifier and vectorizer pickle files
 with open('/Users/wolfsinem/product-tagging/data/classifier2', 'rb') as training_model:
     model = pickle.load(training_model)
 
 with open('/Users/wolfsinem/product-tagging/data/vect2', 'rb') as tfvectorizer:
     vectorizer = pickle.load(tfvectorizer)
+
 
 # Initializing the Flask app 
 app = Flask(__name__)
@@ -38,6 +44,7 @@ def allowed_file(filename):
     :param filename: 
     :type filename:
     """ 
+
     if not "." in filename:
         return False
 
@@ -101,12 +108,30 @@ def read_csv():
                 file.save(os.path.join(app.config["FILE_UPLOADS"], file.filename))
                 print('The uploaded file: {} has been saved into the directory'.format(file.filename))
                 return redirect(request.url)
-
+            
             else:
                 print("That file extension is not allowed")
                 return send_warning()
 
-    return render_template("prediction.html")
+    
+    return render_template("upload_csv.html")
+
+
+@app.route('/extended_csv/<filename>')
+def export_csv():
+    """In the previous function we have read the user input's csv file
+    and this function will transform this dataset to give user a new
+    extended csv file back.
+    """
+
+    # if user uploads file to /static/data/uploads
+        # transform csv file with export_extendedDF() and save to /exports
+    # export_extendedDF()
+
+    # retrieve_csv() is the latest file name
+    
+    # return send_from_directory(app.config["FILE_EXPORTS"], retrieve_csv())
+    pass 
 
 
 @app.route('/generated', methods=['POST', 'GET'])
