@@ -6,7 +6,14 @@ import pickle
 import sys
 import os 
 
+# Data processing
 import pandas as pd
+from collections import Counter
+
+# Language processing
+from nltk.corpus import stopwords 
+from nltk.stem import WordNetLemmatizer 
+import nltk
 
 sys.path.append('/Users/wolfsinem/product-tagging')
 from product_tagging.tags_generator import tokenized_list
@@ -55,6 +62,77 @@ def allowed_file(filename):
         return True
     else:
         return False
+
+
+def tokenize_user_text_input(sentence, size_tags=10):
+    """This function splits a string into substrings using a regular expression
+     using RegexpTokenizer. Additionally it counts the occurence of each word
+     and returns the top x words which can be used as tags
+
+    :param sentence: Text description of a product
+    :type sentence: string
+    """
+    
+    tokenizer = nltk.RegexpTokenizer(r"\w+")
+    new_words = tokenizer.tokenize(str(sentence))
+    new_words = [token.lower() for token in new_words]
+    
+    stop_words = set(stopwords.words('english')) 
+
+    filter_tokens = [w for w in new_words if not w in stop_words]
+    count_terms = Counter(filter_tokens).most_common(size_tags)
+    count_terms = [item[0] for item in count_terms]
+
+    token_lists = []
+    for i in count_terms:
+        token_lists.append(i)
+    
+    token_lists = [item for item in token_lists if not item.isdigit()]
+    
+    return token_lists
+
+
+def lemma_tag(sentence): 
+    """This function uses the NLTK lemmatizer function in the first part. 
+    Lemmatization, unlike Stemming, reduces the inflected words properly ensuring 
+    that the root word belongs to the language See: 
+    https://www.datacamp.com/community/tutorials/stemming-lemmatization-python
+
+    To reduce the amount of duplicates in a set of tags we will thus use 
+    lemmatization. Words like 'weight' and 'weights' will be considered the same 
+    and be saved as 'weight'. In addition to that we have a few other conditions 
+    to clean the set of tags.
+
+    :param sentence: A single sentence e.g. product description
+    :type sentence: string
+    """
+
+    lemmatizer = WordNetLemmatizer()
+
+    lemm_set = []
+    for word in tokenize_user_text_input(sentence):
+        tag = lemmatizer.lemmatize(word)
+        lemm_set.append(tag)
+    
+    lemm_set = list(set(lemm_set))
+    lemm_set = [x for x in lemm_set if not x[-3:] == "ing"]
+    
+    return [i for i in lemm_set if len(i) > 1]
+
+
+def extend_df(df):
+    """This function extends the original dataframe with an extra column 'tags'.
+    This function uses both the lemma_tag() and tokenize_user_text_input() 
+    function to tokenize and clean the set of tags.
+    
+    :param df: This would be the orginal df imported by the user.
+    :type df: string.
+    """
+    
+    for i in df.index:
+        df.at[i,'tags'] = lemma_tag(df.loc[i]['description'])
+        
+    return df
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -118,7 +196,9 @@ def read_csv():
                     pd.options.mode.chained_assignment = None 
                     model_df['tags'] = ""
                     file_path = os.path.join(app.config['FILE_UPLOADS'], "extended-" +filename)
-                    model_df.to_csv(file_path)
+
+                    extended_dataset = extend_df(model_df)
+                    extended_dataset.to_csv(file_path)
                     print('The transformed file: {} has been saved into the directory'.format("extended-"+filename))
 
                 # return redirect('/uploads/'+ filename)
