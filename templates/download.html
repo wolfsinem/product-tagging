@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Download CSV</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://kit.fontawesome.com/9b31ab4365.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type= "text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+</head>
+<body>
+
+<div class="top-logo">
+  <a id="logo" href="https://onestdata.com/" target="_blank" data-supplied-ml-starting-dark="false" data-supplied-ml-starting="false" data-supplied-ml="false">
+    <img class="stnd  dark-version" alt="Onest Data" src="https://onestdata.com/wp-content/uploads/2019/10/onest-white-logo.svg">
+  </a>
+  <a id="logo2" target="_blank" href="https://www.decathlon.com/">
+   <img src="//cdn.shopify.com/s/files/1/1330/6287/t/165/assets/logo.png?v=11826053178058513897" alt="Decathlon" style="float: right;">
+  </a>
+  <div class="topnav">
+    <a class="active" href="http://127.0.0.1:5000/"><i class="fa fa-fw fa-home"></i> Home</a>
+    <a href="http://127.0.0.1:5000/generated"><i class="fas fa-dice-two"></i> Method 2.0</a>
+    <a href="http://127.0.0.1:5000/read_csv"><i class="fas fa-file-csv"></i> Upload CSV</a>
+  </div>  
+</div>
+
+<div class="jumbotron text-center">
+  <h1>Automated Product Tagging</h1>
+    <p>Using machine learning and TFIDF-Vectorizer</p> 
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+      <h1>Download the extended version of <b style="color:rgb(43, 130, 156);">{{value}}</b> here </h2>
+      <h5>The data set is extended with an extra column 'tags'</h5>
+      <hr>
+
+      <a href="/return-files/{{value}}" target="blank"><button class='btn btn-default'>Download</button></a>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>
