@@ -1,15 +1,14 @@
-from flask import Flask, render_template, request, redirect, send_from_directory
+from flask import Flask, render_template, request, redirect, send_file
+from werkzeug.utils import secure_filename
+
 from sklearn.preprocessing import MultiLabelBinarizer
 import pickle
 import sys
 import os 
 
 sys.path.append('/Users/wolfsinem/product-tagging')
-
 from product_tagging.tags_generator import tokenized_list
 from similarityRate import lemma_tag
-
-# from transformedCSVinput import export_extendedDF, retrieve_csv
 
 
 N = 5000 
@@ -39,10 +38,10 @@ app.config.from_object("config.DevelopmentConfig")
 
 def allowed_file(filename):
     """To make sure the user can't upload any type of file we will use this
-    function to limit the input. 
+    function to limit the input to just the formats as described in config.
 
-    :param filename: 
-    :type filename:
+    :param filename: user input file.
+    :type filename: string.
     """ 
 
     if not "." in filename:
@@ -97,41 +96,42 @@ def read_csv():
     if request.method == "POST":
 
         if request.files:
-
             file = request.files["file"]
-
             if file.filename == "":
                 print("There is no file")
                 return redirect(request.url)
 
             if allowed_file(file.filename):
-                file.save(os.path.join(app.config["FILE_UPLOADS"], file.filename))
-                print('The uploaded file: {} has been saved into the directory'.format(file.filename))
-                return redirect(request.url)
-            
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config["FILE_UPLOADS"], filename))
+                print('The uploaded file: {} has been saved into the directory'.format(filename))
+                return redirect('/uploads/'+ filename)
             else:
-                print("That file extension is not allowed")
+                print("File =---> {} has no valid file format".format(file.filename))
                 return send_warning()
 
-    
     return render_template("upload_csv.html")
 
 
-@app.route('/extended_csv/<filename>')
-def export_csv():
+@app.route('/uploads/<filename>', methods=['GET'])
+def download_csv(filename):
     """In the previous function we have read the user input's csv file
     and this function will transform this dataset to give user a new
     extended csv file back.
+
+    :param filename: user input file.
+    :type filename: string.
     """
+    return render_template('download.html',value=filename)
 
-    # if user uploads file to /static/data/uploads
-        # transform csv file with export_extendedDF() and save to /exports
-    # export_extendedDF()
 
-    # retrieve_csv() is the latest file name
-    
-    # return send_from_directory(app.config["FILE_EXPORTS"], retrieve_csv())
-    pass 
+@app.route('/return-files/<filename>')
+def return_files(filename):
+    """
+    TODO: transform user input data and then return the extended version
+    """
+    file_path = os.path.join(app.config["FILE_UPLOADS"], filename)
+    return send_file(file_path, as_attachment=True)
 
 
 @app.route('/generated', methods=['POST', 'GET'])
