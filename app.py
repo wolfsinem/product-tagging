@@ -6,6 +6,8 @@ import pickle
 import sys
 import os 
 
+import pandas as pd
+
 sys.path.append('/Users/wolfsinem/product-tagging')
 from product_tagging.tags_generator import tokenized_list
 from similarityRate import lemma_tag
@@ -103,9 +105,24 @@ def read_csv():
 
             if allowed_file(file.filename):
                 filename = secure_filename(file.filename)
-                file.save(os.path.join(app.config["FILE_UPLOADS"], filename))
+                file_path = os.path.join(app.config['FILE_UPLOADS'], filename)
+                file.save(file_path)
                 print('The uploaded file: {} has been saved into the directory'.format(filename))
-                return redirect('/uploads/'+ filename)
+
+                df = pd.read_csv(file_path)
+                df.dropna(inplace=True)
+                df.drop_duplicates(subset=['description'],inplace=True)
+
+                if 'product_name' in df.columns and 'description' in df.columns: 
+                    model_df = df[['product_name','description']]
+                    pd.options.mode.chained_assignment = None 
+                    model_df['tags'] = ""
+                    file_path = os.path.join(app.config['FILE_UPLOADS'], "extended-" +filename)
+                    model_df.to_csv(file_path)
+                    print('The transformed file: {} has been saved into the directory'.format("extended-"+filename))
+
+                # return redirect('/uploads/'+ filename)
+                    return render_template("download.html", value="extended-"+filename)
             else:
                 print("File =---> {} has no valid file format".format(file.filename))
                 return send_warning()
@@ -118,19 +135,13 @@ def download_csv(filename):
     """In the previous function we have read the user input's csv file
     and this function will transform this dataset to give user a new
     extended csv file back.
-
-    :param filename: user input file.
-    :type filename: string.
     """
-    return render_template('download.html',value=filename)
+    return render_template('download.html',value="extended-"+filename)
 
 
 @app.route('/return-files/<filename>')
 def return_files(filename):
-    """
-    TODO: transform user input data and then return the extended version
-    """
-    file_path = os.path.join(app.config["FILE_UPLOADS"], filename)
+    file_path = os.path.join(app.config["FILE_EXPORTS"], filename)
     return send_file(file_path, as_attachment=True)
 
 
