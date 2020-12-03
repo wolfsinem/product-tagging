@@ -36,5 +36,5 @@ flask run
 or 
 
 ```python
-python app.y
+python app.py
 ```
