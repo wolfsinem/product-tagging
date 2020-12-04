@@ -221,7 +221,7 @@ def download_csv(filename):
 
 @app.route('/return-files/<filename>')
 def return_files(filename):
-    file_path = os.path.join(app.config["FILE_EXPORTS"], filename)
+    file_path = os.path.join(app.config["FILE_UPLOADS"], filename)
     return send_file(file_path, as_attachment=True)
 
 
