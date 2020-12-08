@@ -12,7 +12,7 @@ The machine learning model on the other hand is based on the TfIdfVectorizer. Th
 Alongside the model I chose for the LinearSVC (Linear Support Vector Classification). The purpose of this model is to fit to the data you provide, returning a "best fit" hyperplane that divides, or categorizes, your data. From there, after getting the hyperplane, you can then feed some features to your classifier to see what the "predicted" class is. See: [NLTK](https://pythonprogramming.net/linear-svc-example-scikit-learn-svm-python/). Because we are dealing with products that can carry multiple tags, this is a good multilabel classification model.
 
 # Workflow
-![workflow]((https://github.com/wolfsinem/product-tagging/blob/master/img/workflow.png))
+![workflow](https://github.com/wolfsinem/product-tagging/blob/master/img/workflow.png)
 
 ## UI Home page to use the machine learning model
 ![alt text](https://github.com/wolfsinem/product-tagging/blob/master/img/UI3.png)
