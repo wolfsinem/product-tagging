@@ -8,4 +8,8 @@ function myFunction() {
     alert("Copied the text: " + copyText.value);
   }
 
-  
+  // loading spinner
+  function hideSpinner() { 
+    document.getElementById('spinner') 
+            .style.display = 'none'; 
+}
