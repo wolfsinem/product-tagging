@@ -1,5 +1,5 @@
 .top-logo {
-  background-color: #137eca;
+  background-color: #292b2c;
 }
 
 .topnav {
@@ -21,10 +21,10 @@
 }
 
 .jumbotron {
-    background-color: #137eca;
+    background-color: #292b2c;
 }
 
-.jumbotron h1 {
+.jumbotron h1, h4 {
     color: #ffffff;
 }
 
@@ -56,4 +56,24 @@
   background-color: #0000003b;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+footer {
+  flex: 0 0 auto;
+  display: flex;
+  color: #ccc;
+  margin: 1em;
+  padding: 1em;
+  width: 80%;
+  border-top: 1px solid black;
+  justify-content: center;
+}
+
+footer i {
+  padding: 1em;
 }
