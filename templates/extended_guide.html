@@ -27,15 +27,15 @@
 
 <div class="jumbotron text-center">
   <h1>Automated Product Tagging</h1>
-    <p>Using machine learning and TFIDF-Vectorizer</p> 
+    <p>Extended guide on how to use the model</p> 
 </div>
 
-<div class="container">
+<!-- <div class="container">
   <div class="row">
     <div class="col">
 
       <h1>Upload your dataset here</h1>
-      <h5>Click <a href="http://127.0.0.1:5000/extended_guide"> here </a> for an extended guide</h5>
+      <h5> <a href="http://127.0.0.1:5000/read_csv"> Click here for an extended guide</a></h5>
       <hr>
 
       <form action="/read_csv" method="POST" enctype="multipart/form-data">
@@ -56,22 +56,35 @@
 <br>
 <br>
 <br>
-<br>
+<br> -->
 
 <div class="container">
   <div class="row">
     <div class="col-sm-4 text-center">
-      <!--<img src="https://res.cloudinary.com/wolfsinem/image/upload/v1608726884/firststep_x40xjy.png" alt="Guideline">-->
+      <h3>Step 1</h3>
+    </div>
+
+    <div class="col-sm-4 text-center">
+      <h3>Step 2</h3>
+    </div>
+
+    <div class="col-sm-3 text-center">
+      <h3>Step 3</h3>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4 text-center">
       <h3>Your dataset needs to be <b style="color:#4FCCC5;">CSV (.csv)</b> formatted or else you will get an error</h3>
     </div>
 
     <div class="col-sm-4 text-center">
-      <!--<img src="https://res.cloudinary.com/wolfsinem/image/upload/v1608727496/secondstep_khd7mr.png" alt="Guideline">-->
       <h3>Make sure you have both columns <b style="color:#4FCCC5;">product_name</b> and <b style="color:#4FCCC5;">description</b> written exactly like this</h3>
     </div>
 
     <div class="col-sm-3 text-center">
-      <!--<img src="https://res.cloudinary.com/wolfsinem/image/upload/v1608727497/thirdstep_srzgp3.png" alt="Guideline">-->
       <h3>The <b style="color:#4FCCC5;">new dataset</b> will have an extra column with <b style="color:#4FCCC5;">tags</b> added to it at the end</h3>
     </div>
   </div>

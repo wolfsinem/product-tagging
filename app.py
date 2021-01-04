@@ -21,7 +21,7 @@ from similarityRate import lemma_tag
 
 
 N = 5000 
-MODEL = tokenized_list() # sys.append =----> export-user-input for new extended df
+MODEL = tokenized_list()
 
 
 # Preprocessing 
@@ -245,6 +245,12 @@ def generate_tags():
         return render_template("algorithm.html", tags_set = tags_set)
     
     return render_template("algorithm.html")
+
+
+@app.route('/extended_guide', methods=['POST', 'GET'])
+def guide():
+    """Setting up the extended guide for more information on uploading CSV"""
+    return render_template('extended_guide.html')
 
 
 if __name__ == "__main__":
