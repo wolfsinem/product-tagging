@@ -92,7 +92,7 @@ def tokenize_user_text_input(sentence, size_tags=10):
     return token_lists
 
 
-def lemma_tag(sentence): 
+def lemma_tag(sentence,tags_size): 
     """This function uses the NLTK lemmatizer function in the first part. 
     Lemmatization, unlike Stemming, reduces the inflected words properly ensuring 
     that the root word belongs to the language See: 
@@ -117,10 +117,10 @@ def lemma_tag(sentence):
     lemm_set = list(set(lemm_set))
     lemm_set = [x for x in lemm_set if not x[-3:] == "ing"]
     
-    return [i for i in lemm_set if len(i) > 1]
+    return [i for i in lemm_set if len(i) > 1][:tags_size]
 
 
-def extend_df(df):
+def extend_df(df,tags_size):
     """This function extends the original dataframe with an extra column 'tags'.
     This function uses both the lemma_tag() and tokenize_user_text_input() 
     function to tokenize and clean the set of tags.
@@ -130,7 +130,7 @@ def extend_df(df):
     """
     
     for i in df.index:
-        df.at[i,'tags'] = lemma_tag(df.loc[i]['description'])
+        df.at[i,'tags'] = lemma_tag(df.loc[i]['description'],tags_size)
         
     return df
 
@@ -174,6 +174,11 @@ def read_csv():
     """
     
     if request.method == "POST":
+        user_input_size = request.form.get('tags_size')
+        if user_input_size:
+            tags_size = int(user_input_size) # + 1
+        else:
+            tags_size = 20
 
         if request.files:
             file = request.files["file"]
@@ -197,7 +202,7 @@ def read_csv():
                     model_df['tags'] = ""
                     file_path = os.path.join(app.config['FILE_UPLOADS'], "extended-" +filename)
 
-                    extended_dataset = extend_df(model_df)
+                    extended_dataset = extend_df(model_df,tags_size)
                     extended_dataset.to_csv(file_path)
                     print('The transformed file: {} has been saved into the directory'.format("extended-"+filename))
 
