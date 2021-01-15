@@ -34,9 +34,8 @@ def similar(string1, string2):
     score = sequence.ratio()
     return score
 
-# print(similar(df.loc[19970]['description'],df.loc[19967]['description'])) 
+print(similar(df.loc[19970]['description'],df.loc[19967]['description'])) 
 # gives a similarity rate of 0.9954954954954955
-
 
 def pos_tagger(product_description):
     """This function is part of the NLTK library which is a part-of-speach tagger.
@@ -54,7 +53,7 @@ def pos_tagger(product_description):
     POS = nltk.pos_tag(tags)
     return POS
 
-# print(pos_tagger(df.loc[5]['description']))
+print(pos_tagger(df.loc[5]['description']))
 # [('paper', 'NN'), 
 # ('crystal', 'NN'), 
 # ('weight', 'VBD'), 
@@ -98,7 +97,7 @@ def similarity_rate(description):
             secondW = diff_set[i][1]
             similarityScore = similar(diff_set[i][0],diff_set[i][1])
             scores.append([firstW, secondW, similarityScore])
-#             print("Score of similarity for {} and {} is: {}".format(firstW, secondW, similarityScore))
+            print("Score of similarity for {} and {} is: {}".format(firstW, secondW, similarityScore))
     
     return scores
 
@@ -127,8 +126,9 @@ def lemma_tag(set_tags, size_tags):
     return [i for i in lemm_set if len(i) > 1] # remove words with single character
 
 # # set of tags we used to generate
-# product_description = df.loc[2]['description']
-# print(product_description)
+product_description = df.loc[2]['description']
+print(product_description)
+
 # # new set of tags
-# new_set = lemma_tag(product_description)
-# print(new_set)
+new_set = lemma_tag(product_description)
+print(new_set)

@@ -66,21 +66,24 @@ Linear_pipeline.fit(X_train, y_train)
 prediction = Linear_pipeline.predict(X_test)
 print('Accuracy for LinearSVC is {}'.format(accuracy_score(y_test, prediction)))
 
-# saving everything into pickle file
+# To use the machine learning for deployement you need to save the ML model
+# as a pickle file first. Take into consideration that it's a really big file
+# up to 5GB
 with open('classifier2', 'wb') as picklefile:
     pickle.dump(Linear_pipeline,picklefile)
 
 with open('vect2', 'wb') as picklefile:
     pickle.dump(vectorizer,picklefile)
 
-# open the pickle files 
+# After saving the ML model you can open the pickle file and start using the 
+# ML model
 with open('/Users/wolfsinem/product-tagging/data/classifier2', 'rb') as training_model:
     model = pickle.load(training_model)
 
 with open('/Users/wolfsinem/product-tagging/data/vect2', 'rb') as training_model:
     vectorizer = pickle.load(training_model)
 
-
+# This would be an example of how you can use the saved model. 
 user_input_string = ["""Key Features of Alisha Solid Womens Cycling Shorts Cotton 
                     'Lycra Navy, Red, Navy,Specifications of Alisha Solid Womens 
                     Cycling Shorts Shorts Details Number of Contents in Sales 
@@ -94,6 +97,8 @@ user_input_string = vectorizer.transform(user_input_string).toarray()
 label = model.predict(user_input_string)
 tags = mlb.inverse_transform(label)
 print(tags)
+
+# The output of the model are the following tags:
 #  [('alisha', 'care', 'cotton', 'cycling', 'gentle', 'ideal', 'lukewarm', 
 # 'lycra', 'machine', 'navy', 'pack', 'package', 'pattern', 'red', 'shorts', 
 # 'solid', 'wash', 'water', 'women')]

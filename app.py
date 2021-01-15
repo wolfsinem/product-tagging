@@ -174,6 +174,7 @@ def read_csv():
     """
     
     if request.method == "POST":
+        
         user_input_size = request.form.get('tags_size')
         if user_input_size:
             tags_size = int(user_input_size) # + 1

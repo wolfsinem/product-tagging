@@ -79,6 +79,6 @@ def extend_tokenized_model():
     return model_df
 
 
-# print(extend_tokenized_model().head())
+print(extend_tokenized_model().head())
 # this returns a newly made dataframe with an extra 'tags' column for each
 # column 
