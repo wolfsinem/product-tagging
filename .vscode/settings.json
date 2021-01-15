@@ -1,0 +1,10 @@
+{
+    // Columns at which to show vertical rulers
+    "editor.rulers": [
+        {
+            "column": 80,
+            "color": "#424142"
+        },
+    ],
+    "git.ignoreLimitWarning": true,
+}
